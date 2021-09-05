@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+  </head>
+  <body>
+
+    <h1>Register new user details</h1>
+
+    <form th:action="@{/registerUserForm}" th:object="${quizMaster} ">
+
+      <div>
+        <label>First Name: </label>
+        <input type="text"  th:field="*{firstName}">
+      </div>
+
+      <div>
+        <label>Last Name: </label>
+        <input type="text"  th:field="*{lastName}">
+      </div>
+
+      <div>
+        <label>Email: </label>
+        <input type="text"  th:field="*{email}">
+      </div>
+
+      <div th:if="${errorMessage}">
+        <div th:text="${errorMessage}"></div>
+      </div>
+
+      <button type="submit " > register user</button>
+
+    </form>
+
+
+  </body>
+</html>

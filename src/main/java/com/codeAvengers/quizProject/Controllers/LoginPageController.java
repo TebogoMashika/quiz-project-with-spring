@@ -4,8 +4,8 @@ import com.codeAvengers.quizProject.Model.LogIn;
 import com.codeAvengers.quizProject.Model.QuizMaster;
 import com.codeAvengers.quizProject.Repositories.LogInRepository;
 import com.codeAvengers.quizProject.Repositories.QuizMasterRepository;
-import com.codeAvengers.quizProject.LoginService.LogInService;
-import com.codeAvengers.quizProject.LoginService.LogInStatus;
+import com.codeAvengers.quizProject.Service.LoginService.LogInService;
+import com.codeAvengers.quizProject.Service.LoginService.LogInStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +26,14 @@ public class LoginPageController {
         this.logInRepository = logInRepository;
         this.quizMasterRepository = quizMasterRepository;
         this.logInService = logInService;
+    }
+
+    // receive request from this link - "/QuizHomePage"
+    // model attribute is logIn
+    // return /LoginPage - (will be directed to this page)
+    @RequestMapping(value = "/QuizHomePage")
+    public String requestQuizHomePage(){
+        return "/QuizHomePage";
     }
 
     // receive request from this link - "/LoginPage"
@@ -63,7 +71,7 @@ public class LoginPageController {
     }
 
     //quizMaster - is a model attribute which will be passed as an object on the registerPage form
-    //if we dont pass the model attribute (quizMaster) to the template - the page will give a results binding error
+    //if we don't pass the model attribute (quizMaster) to the template - the page will give a results binding error
     // do not pass QuizMaster as the is the model - pass the model attribute (quizMaster)
     // receive request from this link - "/registerUser"
     // return "/registerPage" - (will be directed to this page)
@@ -117,7 +125,8 @@ public class LoginPageController {
     // save the model to the database
     // return "/LoginPage" - (will be directed to this page)
     @RequestMapping(value = "/registerNewUserLogInsForm")
-    public String newUserLogins(LogIn logIn){
+    public String newUserLogins(LogIn logIn, QuizMaster quizMaster){
+
 
         logInRepository.save(logIn);
 

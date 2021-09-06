@@ -19,11 +19,13 @@ public class LogIn {
     @Column(name = "password")
     private Integer password;
 
+    // task pending - improve the one to one relationship
+
 
     public LogIn() {
     }
 
-    public LogIn(String username, Integer password, QuizMaster quizMaster) {
+    public LogIn(String username, Integer password) {
         this.username = username;
         this.password = password;
     }
@@ -51,6 +53,5 @@ public class LogIn {
     public void setPassword(Integer password) {
         this.password = password;
     }
-
 
 }

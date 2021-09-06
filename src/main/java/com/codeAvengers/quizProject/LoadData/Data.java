@@ -4,7 +4,7 @@ import com.codeAvengers.quizProject.Model.LogIn;
 import com.codeAvengers.quizProject.Model.QuizMaster;
 import com.codeAvengers.quizProject.Repositories.LogInRepository;
 import com.codeAvengers.quizProject.Repositories.QuizMasterRepository;
-import com.codeAvengers.quizProject.LoginService.LogInService;
+import com.codeAvengers.quizProject.Service.LoginService.LogInService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -27,9 +27,10 @@ public class Data implements CommandLineRunner {
 
         QuizMaster quizMaster = new QuizMaster();
 
-        quizMaster.setFirstName("user");
-        quizMaster.setLastName("user lastName");
-        quizMaster.setEmail("user@gmail.com");
+        quizMaster.setFirstName("admin");
+        quizMaster.setLastName("admin");
+        quizMaster.setEmail("admin@gmail.com");
+
 
         quizMasterRepository.save(quizMaster);
 
@@ -38,7 +39,7 @@ public class Data implements CommandLineRunner {
         LogIn user = new LogIn();
 
 
-        user.setUsername("user");
+        user.setUsername("admin");
         user.setPassword(1234);
         logInRepository.save(user);
 

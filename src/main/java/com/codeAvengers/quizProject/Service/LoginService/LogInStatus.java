@@ -1,4 +1,4 @@
-package com.codeAvengers.quizProject.LoginService;
+package com.codeAvengers.quizProject.Service.LoginService;
 
 // enum class to represent Login Statuses
 public enum LogInStatus {

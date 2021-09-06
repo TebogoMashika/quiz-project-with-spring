@@ -1,4 +1,4 @@
-package com.codeAvengers.quizProject.LoginService;
+package com.codeAvengers.quizProject.Service.LoginService;
 
 import com.codeAvengers.quizProject.Model.LogIn;
 import com.codeAvengers.quizProject.Model.QuizMaster;
@@ -29,6 +29,7 @@ public class LogInService {
 
         List<LogIn> dataBaseResults  = logInRepository.findByUsername(username);
 
+
         for (LogIn user: dataBaseResults){
 
             String databaseUsername = user.getUsername();
@@ -39,9 +40,12 @@ public class LogInService {
 
             }else {
                 return LogInStatus.FAILURE;
-
             }
 
+        }
+
+        if (dataBaseResults.size() == 0){
+            return LogInStatus.FAILURE;
         }
 
         return null;
@@ -58,7 +62,7 @@ public class LogInService {
             String resultsLastname = user.getLastName();
             String resultsEmail = user.getEmail();
 
-            if (resultsFirstname.equals(firstname) && resultsLastname.equals(lastname) && resultsEmail.equals(email)){
+            if (resultsFirstname.equals(firstname) && resultsLastname.equals(lastname) || resultsEmail.equals(email)){
                 return LogInStatus.USER_ALREADY_EXISTS;
             }else {
                 return LogInStatus.SUCCESS;

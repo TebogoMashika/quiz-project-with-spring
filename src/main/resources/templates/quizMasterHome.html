@@ -8,8 +8,8 @@
 
         <h1>Quiz Master Home Page</h1>
 
-        <label> Enter Game Pin:
-            <input type="text"> <br>
+        <label th:each="gamePin:${GamePinModel}"> Here is your Game Pin:
+            <p th:text="${gamePin}"></p> <br>
         </label> <br>
 
         <label> Enter Game Name:

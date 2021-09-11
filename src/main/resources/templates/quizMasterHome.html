@@ -8,13 +8,17 @@
 
         <h1>Quiz Master Home Page</h1>
 
-        <label th:each="gamePin:${GamePinModel}"> Here is your Game Pin:
-            <p th:text="${gamePin}"></p> <br>
-        </label> <br>
+        <form th:action="@{/RequestGameName}" >
 
-        <label> Enter Game Name:
-            <input type="text">
-        </label>
+            <div>
+                <label>Enter Game Name: </label>
+
+                <input type="text"  th:name="gameName"/>
+            </div>
+
+            <button type="submit " > Next</button>
+
+        </form>
 
     </body>
 </html>

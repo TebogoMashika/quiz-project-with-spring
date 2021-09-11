@@ -21,13 +21,6 @@ public class GameController {
         this.gameRepository = gameRepository;
     }
 
-    //@RequestMapping("/QuizMasterHomePage") // receive request from this link
-    public void setGamePinX(Model model){
-
-        int x = gameService.getRandomInt(100000, 10000);
-        model.addAttribute("GamePinModel", x);
-
-    }
 
     // receives user input from the template
     // saves the user input to the database

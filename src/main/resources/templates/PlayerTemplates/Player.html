@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Player </title>
+  </head>
+  <body>
+
+   <!--display the game pin here-->
+
+    <h1>Player</h1>
+
+    <form th:action="@{/requestPlayerGameInputs}" >
+
+      <div>
+        <label>Enter Game Pin: </label>
+
+        <input type="text"  th:name="gamePinForPlayer"/>
+
+      </div> <br>
+
+      <div>
+        <label>Set Username: </label>
+        <input type="text"  th:name="gameUsername"/>
+
+      </div> <br>
+
+      <button type="submit" > Play</button>
+
+    </form>
+  </body>
+</html>

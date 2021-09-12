@@ -29,7 +29,6 @@ public class LogInService {
 
         List<LogIn> dataBaseResults  = logInRepository.findByUsername(username);
 
-
         for (LogIn user: dataBaseResults){
 
             String databaseUsername = user.getUsername();
@@ -63,6 +62,8 @@ public class LogInService {
             String resultsEmail = user.getEmail();
 
             if (resultsFirstname.equals(firstname) && resultsLastname.equals(lastname) || resultsEmail.equals(email)){
+
+
                 return LogInStatus.USER_ALREADY_EXISTS;
             }else {
                 return LogInStatus.SUCCESS;
@@ -71,6 +72,14 @@ public class LogInService {
 
 
         return null;
+    }
+
+
+    // save login details
+    public void saveLogInDetails(LogIn logIn){
+
+        logInRepository.save(logIn);
+
     }
 
 

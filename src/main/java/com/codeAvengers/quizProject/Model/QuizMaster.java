@@ -27,6 +27,9 @@ public class QuizMaster {
     private String email;
 
     // task pending - improve the one to one relationship
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "loggedIn_id", referencedColumnName = "id")
+    private LogIn logIn;
 
 
 
@@ -34,11 +37,11 @@ public class QuizMaster {
     public QuizMaster() {
     }
 
-    public QuizMaster(String firstName, String lastName, String email) {
+    public QuizMaster(String firstName, String lastName, String email, LogIn logIn) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-
+        this.logIn = logIn;
     }
 
     public Long getId() {
@@ -73,7 +76,13 @@ public class QuizMaster {
         this.email = email;
     }
 
+    public LogIn getLogIn() {
+        return logIn;
+    }
 
+    public void setLogIn(LogIn logIn) {
+        this.logIn = logIn;
+    }
 }
 
 

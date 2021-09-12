@@ -7,6 +7,7 @@ import com.codeAvengers.quizProject.Repositories.QuizMasterRepository;
 import com.codeAvengers.quizProject.Service.LoginService.LogInService;
 import com.codeAvengers.quizProject.Service.LoginService.LogInStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -103,6 +104,7 @@ public class LoginPageController {
             case SUCCESS -> {
                 quizMasterRepository.save(quizMaster);
 
+                quizMaster.getLogIn();
                 return "redirect:/registerUserLogins.html";
             }
         }
@@ -125,10 +127,10 @@ public class LoginPageController {
     // save the model to the database
     // return "/LoginPage" - (will be directed to this page)
     @RequestMapping(value = "/registerNewUserLogInsForm")
-    public String newUserLogins(LogIn logIn, QuizMaster quizMaster){
+    public String newUserLogins(LogIn logIn){
 
-
-        logInRepository.save(logIn);
+        logInService.saveLogInDetails(logIn);
+        //logInRepository.save(logIn);
 
         return "redirect:/LoginPage" ;
 

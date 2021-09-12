@@ -20,14 +20,17 @@ public class LogIn {
     private Integer password;
 
     // task pending - improve the one to one relationship
+    @OneToOne(mappedBy = "logIn")
+    private QuizMaster quizMaster;
 
 
     public LogIn() {
     }
 
-    public LogIn(String username, Integer password) {
+    public LogIn(String username, Integer password, QuizMaster quizMaster) {
         this.username = username;
         this.password = password;
+        this.quizMaster = quizMaster;
     }
 
     public Long getId() {
@@ -54,4 +57,11 @@ public class LogIn {
         this.password = password;
     }
 
+    public QuizMaster getQuizMaster() {
+        return quizMaster;
+    }
+
+    public void setQuizMaster(QuizMaster quizMaster) {
+        this.quizMaster = quizMaster;
+    }
 }

@@ -29,31 +29,36 @@ public class Data implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        // register quiz master
         QuizMaster quizMaster = new QuizMaster();
-
         quizMaster.setFirstName("admin");
         quizMaster.setLastName("admin");
         quizMaster.setEmail("admin@gmail.com");
-
 
         quizMasterRepository.save(quizMaster);
 
         System.out.println("registered quiz Master");
 
-        LogIn user = new LogIn();
+        // register login details
+        LogIn registerLoginDetails = new LogIn();
 
+        registerLoginDetails.setUsername("admin");
+        registerLoginDetails.setPassword(1234);
 
-        user.setUsername("admin");
-        user.setPassword(1234);
-        logInRepository.save(user);
+        // set the id of the quiz master logged in
+        registerLoginDetails.setQuizMaster(quizMaster);
 
-        System.out.println("user logged in");
+        // save logged in details
+        logInRepository.save(registerLoginDetails);
+
+        System.out.println("user registered username and password");
 
 
         Game newGame = new Game();
 
         newGame.setGamePin(528);
         newGame.setGameName("NeoQuiz");
+
         gameRepository.save(newGame);
 
         System.out.println("Set game details");

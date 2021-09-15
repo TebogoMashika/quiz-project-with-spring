@@ -61,6 +61,13 @@ public class Data implements CommandLineRunner {
 
         gameRepository.save(newGame);
 
+        Game xGame = new Game();
+
+        xGame.setGamePin(1234);
+        xGame.setGameName("testGame");
+
+        gameRepository.save(xGame);
+
         System.out.println("Set game details");
 
     }

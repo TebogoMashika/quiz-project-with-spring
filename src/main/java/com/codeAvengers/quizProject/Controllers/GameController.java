@@ -24,16 +24,17 @@ public class GameController {
 
     // receives user input from the template
     // saves the user input to the database
-    @RequestMapping("/RequestGameName")
-    public void receiveGameName(@RequestParam(value = "gameName") String gameName, Game game){
+    @RequestMapping("/requestGameName")
+    public String receiveGameName(@RequestParam(value = "gameName") String gameName,
+                                  @RequestParam(value = "gamePin") String gamePin,
+                                  Game game){
 
+        // pending task - validate game pin
         gameRepository.save(game);
 
-       //return "/RequestGameName";
+       return "GameTemplates/GameQuestions/questions.html";
 
-       // couple of options for displaying the game pin
-            // 1, either display the game pin first then user clicks next to go to the game pin template
-            // 2, let the user capture the game pin. like this we will save it same time as we save the game name the go display the sample
+
     }
 
 

@@ -8,7 +8,13 @@
 
         <h1>Quiz Master Home Page</h1>
 
-        <form th:action="@{/RequestGameName}" >
+        <form th:action="@{/requestGameName}" >
+
+            <div>
+                <label>Enter Game Pin: </label>
+                <input type="text"  th:name="gamePin"/>
+
+            </div> <br>
 
             <div>
                 <label>Enter Game Name: </label>
@@ -16,7 +22,7 @@
                 <input type="text"  th:name="gameName"/>
             </div>
 
-            <button type="submit " > Next</button>
+            <button type="submit" > Next</button>
 
         </form>
 

@@ -6,9 +6,21 @@
   </head>
   <body>
 
-   <!--display the game pin here-->
+
 
     <h1>Player</h1>
+
+    <!--display the game pin here-->
+
+    <div>
+
+      <label th:each="displayGamePin : ${viewGamePin} ">
+
+        <p>Game pin:  <strong th:text="${displayGamePin.gamePin}"></strong> </p>
+
+      </label>
+
+    </div>
 
     <form th:action="@{/requestPlayerGameInputs}" >
 

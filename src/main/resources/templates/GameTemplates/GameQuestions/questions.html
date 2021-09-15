@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+  </head>
+  <body>
+
+    <h1>Questions</h1>
+
+    <form th:action="@{/submitQuestions}" >
+
+      <label>Set Question: </label>
+      <input type="text"  th:name="question"/>  <br>
+
+      </div> <br>
+
+      <div>
+        <label>Correct Answer: </label>
+
+        <input type="text"  th:name="CorrectAnswer"/>
+      </div>  <br>
+
+
+      <div>
+        <label>Possible Answer 1: </label>
+
+        <input type="text"  th:name="OtherAnswers_1"/>
+      </div>
+
+      <div>
+        <label>Possible Answer 2: </label>
+
+        <input type="text"  th:name="OtherAnswers_2"/>
+      </div>
+
+      <div>
+        <label>Possible Answer 3: </label>
+
+        <input type="text"  th:name="OtherAnswers_3"/>
+      </div>
+
+      <div>
+        <label>Possible Answer 4: </label>
+
+        <input type="text"  th:name="OtherAnswers_4"/>
+      </div>
+
+
+      <button type="submit  @{/}" > Next</button>
+
+    </form>
+
+
+  </body>
+</html>

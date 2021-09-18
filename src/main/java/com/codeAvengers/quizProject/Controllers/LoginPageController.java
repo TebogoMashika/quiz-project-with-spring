@@ -67,7 +67,6 @@ public class LoginPageController {
             }
         }
 
-
         return null;
     }
 

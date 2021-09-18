@@ -33,8 +33,6 @@ public class PlayerController {
     }
 
 
-
-
     // get game pin and username
     @RequestMapping("/requestPlayerGameInputs")
     public String getPlayerHomePageInputs(@RequestParam(value = "gamePinForPlayer") String gamePinForPlayer,
@@ -42,8 +40,20 @@ public class PlayerController {
                                     Player player){
         playerService.savePlayerInputs(player);
 
-        return "/PlayerTemplates/Player.html";
+        return "redirect:/displayPlayerQuestions";
     }
+
+    // display game questions
+    @RequestMapping("/displayPlayerQuestions")
+    public String displayQuestions(Model model){
+
+        model.addAttribute("gameQuestions", playerService.displayGameQuestions());
+
+        return "/PlayerTemplates/playerQuestions.html";
+
+    }
+
+
 
 
 }

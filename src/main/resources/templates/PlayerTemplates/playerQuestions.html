@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Player Questions</title>
+  </head>
+  <body>
+
+  <h1 >Player Questions</h1>
+
+    <ul th:each="questions : ${gameQuestions}">
+        <p th:text="${questions.question}"> </p>
+        <input type="radio" th:text="${questions.OtherAnswers_1}"> <br>
+        <input type="radio" th:text="${questions.OtherAnswers_2}"> <br>
+        <input type="radio" th:text="${questions.OtherAnswers_3}"> <br>
+        <input type="radio" th:text="${questions.OtherAnswers_4}"> <br>
+
+      <!--pending task. make button submit answers -->
+        <button type="submit" >submit </button>
+    </ul>
+  </body>
+</html>

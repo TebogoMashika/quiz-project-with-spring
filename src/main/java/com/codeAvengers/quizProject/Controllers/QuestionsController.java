@@ -37,9 +37,10 @@ public class QuestionsController {
 
         questionService.saveGameQuestions(gameQuestions);
 
-        return "redirect:/GameTemplates/GameQuestions/questions.html";
+        return "/GameTemplates/GameQuestions/questions.html";
 
     }
+
 
 
 }

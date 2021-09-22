@@ -53,6 +53,23 @@ public class PlayerController {
 
     }
 
+    // mapping has errors - to resolve
+    @RequestMapping("submitQuestionAnswers")
+    public void questionAnswers(@RequestParam(value = "answer1", required = false)String answer1,
+                                @RequestParam(value ="answer2", required = false)String answer2,
+                                @RequestParam(value ="answer3", required = false)String answer3,
+                                @RequestParam(value ="answer4", required = false)String answer4){
+
+        System.out.println(answer1);
+        System.out.println(answer2);
+        System.out.println(answer3);
+        System.out.println(answer4);
+
+
+    }
+
+
+
 
 
 

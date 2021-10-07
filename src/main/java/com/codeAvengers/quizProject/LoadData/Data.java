@@ -79,9 +79,9 @@ public class Data implements CommandLineRunner {
         gameQuestions.setQuestion("What is the game question");
         gameQuestions.setCorrectAnswer("correct answer");
         gameQuestions.setOtherAnswers_1("Answer_1");
-        gameQuestions.setOtherAnswers_2("Answer_2");
+        gameQuestions.setOtherAnswers_2("Answer_1");
         gameQuestions.setOtherAnswers_3("correct answer");
-        gameQuestions.setOtherAnswers_4("Answer_4");
+        gameQuestions.setOtherAnswers_4("Answer_1");
 
         gameQuestionsRepository.save(gameQuestions);
 
@@ -89,10 +89,10 @@ public class Data implements CommandLineRunner {
         GameQuestions gameQuestions1 = new GameQuestions();
         gameQuestions1.setQuestion("What is the game question");
         gameQuestions1.setCorrectAnswer("this answer is correct");
-        gameQuestions1.setOtherAnswers_1("Answers");
+        gameQuestions1.setOtherAnswers_1("Answers_2");
         gameQuestions1.setOtherAnswers_2("this answer is correct");
-        gameQuestions1.setOtherAnswers_3("Answers");
-        gameQuestions1.setOtherAnswers_4("Answers");
+        gameQuestions1.setOtherAnswers_3("Answers_2");
+        gameQuestions1.setOtherAnswers_4("Answers_2");
 
         gameQuestionsRepository.save(gameQuestions1);
 
@@ -100,10 +100,10 @@ public class Data implements CommandLineRunner {
         GameQuestions gameQuestion11 = new GameQuestions();
         gameQuestion11.setQuestion("What is the game question");
         gameQuestion11.setCorrectAnswer("correct answer");
-        gameQuestion11.setOtherAnswers_1("test1");
-        gameQuestion11.setOtherAnswers_2("test2");
+        gameQuestion11.setOtherAnswers_1("Answers_3");
+        gameQuestion11.setOtherAnswers_2("Answers_3");
         gameQuestion11.setOtherAnswers_3("correct answer");
-        gameQuestion11.setOtherAnswers_4("test1");
+        gameQuestion11.setOtherAnswers_4("Answers_3");
 
         gameQuestionsRepository.save(gameQuestion11);
 

@@ -7,7 +7,7 @@ import com.codeAvengers.quizProject.Repositories.QuizMasterRepository;
 import com.codeAvengers.quizProject.Service.LoginService.LogInService;
 import com.codeAvengers.quizProject.Service.LoginService.LogInStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -51,6 +51,7 @@ public class LoginPageController {
     // LogInStatus - is an enum class that has all our statuses
     // pass username and password to the loginUser method in logInService class
     // displays the error if it exists
+
     @RequestMapping(value = "/userLogInForm")
     public String loginUserForm(@ModelAttribute("userLogInModel")  LogIn logIn, RedirectAttributes redirectAttributes){
 
@@ -129,7 +130,6 @@ public class LoginPageController {
     public String newUserLogins(LogIn logIn){
 
         logInService.saveLogInDetails(logIn);
-        //logInRepository.save(logIn);
 
         return "redirect:/LoginPage" ;
 

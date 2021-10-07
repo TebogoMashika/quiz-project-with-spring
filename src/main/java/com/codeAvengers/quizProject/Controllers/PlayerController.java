@@ -11,15 +11,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
-public class PlayerController {
+public class PlayerController  {
 
     private final PlayerRepository playerRepository;
     private final PlayerService playerService;
     private final GameRepository gameRepository;
 
+    // Templates
+    private static final String  viewPlayerTemplate= "/PlayerTemplates/Player.html";
+    private static final String playerQuestionsTemplate = "/PlayerTemplates/playerQuestions.html";
+
+    // URLs
+    private static final String requestPlayerHomePage = "/requestPlayerHomePage";
+    private static final String requestPlayerGameInputs = "/requestPlayerGameInputs";
+    private static final String displayPlayerQuestions = "/displayPlayerQuestions";
+    private static final String nextQuestion = "/nextQuestion";
+    private static final String submitQuestionAnswers = "/submitQuestionAnswers";
 
     public PlayerController(PlayerRepository playerRepository, PlayerService playerService, GameRepository gameRepository) {
         this.playerRepository = playerRepository;
@@ -28,17 +37,17 @@ public class PlayerController {
     }
 
     // display game pin
-    @RequestMapping("/requestPlayerHomePage")
+    @RequestMapping(requestPlayerHomePage)
     public String requestPlayerPage(Model model){
 
         model.addAttribute("viewGamePin", playerService.displayGamePin());
 
-        return "/PlayerTemplates/Player.html";
+        return viewPlayerTemplate;
     }
 
 
     // get game pin and username
-    @RequestMapping("/requestPlayerGameInputs")
+    @RequestMapping(requestPlayerGameInputs)
     public String getPlayerHomePageInputs(@RequestParam(value = "gamePinForPlayer") String gamePinForPlayer,
                                     @RequestParam(value = "gameUsername") String gameUsername,
                                     Player player){
@@ -48,18 +57,44 @@ public class PlayerController {
     }
 
     // display game questions
-    @RequestMapping("/displayPlayerQuestions")
+    @RequestMapping(displayPlayerQuestions)
     public String displayQuestions(Model model){
+
+        // call this method to add the questions into a list
+        playerService.storeGameQuestionIDs();
 
         model.addAttribute("gameQuestions", playerService.displayGameQuestions());
 
-        return "/PlayerTemplates/playerQuestions.html";
+        return playerQuestionsTemplate;
 
     }
 
+    @RequestMapping(nextQuestion)
+    public String displayNextQuestion(Model model){
+
+        EPlayerAnswerStatus nullResults = playerService.listIsNull();
+
+        if (nullResults == EPlayerAnswerStatus.NULL_RESULTS){
+
+            // we get this results when the list empty
+            // when the list is empty it means the is no more questions
+            // the display the players answers
+            System.out.println("Player Results");
+
+        }else {
+            model.addAttribute("gameQuestions", playerService.displayGameQuestions());
+
+            return playerQuestionsTemplate;
+        }
+
+        return null;
+
+    }
+
+    // next question
 
     // mapping has errors - to resolve
-    @RequestMapping("/submitQuestionAnswers")
+    @RequestMapping(submitQuestionAnswers)
     public void questionAnswers(@RequestParam(value = "id", required = false) String[] id,
                                 @RequestParam(value = "answer1", required = false) String[] answer1,
                                 @RequestParam(value ="answer2", required = false)String[] answer2,
@@ -84,14 +119,9 @@ public class PlayerController {
             }
         }
 
-
         System.out.println(listOfCorrectStatus.size());
         System.out.println(listOfIncorrectStatus.size());
         System.out.println(listOfNoInputStatus.size());
-
-
-
-
 
 
     }

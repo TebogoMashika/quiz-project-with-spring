@@ -4,6 +4,7 @@ import com.codeAvengers.quizProject.Model.GameQuestions;
 import com.codeAvengers.quizProject.Repositories.GameQuestionsRepository;
 import com.codeAvengers.quizProject.Service.GameQuestionService.QuestionService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,14 +18,6 @@ public class QuestionsController {
         this.gameQuestionsRepository = gameQuestionsRepository;
         this.questionService = questionService;
     }
-
-    //@RequestMapping("/requestGameQuestions")
-    //public String requestQuestionsPage(){
-
-       // return "/templates/GameTemplates/GameQuestions/questions.html";
-
-    //}
-
 
     @RequestMapping("/submitQuestions")
     public String submitQuestions(@RequestParam(value = "question") String question,
@@ -40,6 +33,15 @@ public class QuestionsController {
         return "/GameTemplates/GameQuestions/questions.html";
 
     }
+
+
+    @RequestMapping("/finishCapturingQuestionsButton")
+    public String finishButton(Model model){
+
+        return "/GameTemplates/GameQuestions/scoreDisplay.html";
+
+    }
+
 
 
 

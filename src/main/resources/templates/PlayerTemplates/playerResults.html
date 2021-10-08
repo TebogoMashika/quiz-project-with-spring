@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Game Results</title>
+  </head>
+
+  <body>
+
+  <h1>Player Results</h1>
+
+
+  <div th:each="answers : ${playerCorrectAnswers}">
+
+    <label> Number of Correct Answers Captured
+      <p th:text="${answers}"></p>
+    </label>
+
+
+  </div>
+
+  </body>
+</html>

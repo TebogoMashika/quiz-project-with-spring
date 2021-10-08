@@ -22,6 +22,7 @@ public class PlayerController  {
     // Templates
     private static final String  viewPlayerTemplate= "/PlayerTemplates/Player.html";
     private static final String playerQuestionsTemplate = "/PlayerTemplates/playerQuestions.html";
+    private static final String playerResultsTemplate = "/PlayerTemplates/playerResults.html";
 
     // URLs
     private static final String requestPlayerHomePage = "/requestPlayerHomePage";
@@ -61,7 +62,7 @@ public class PlayerController  {
     public String displayQuestions(Model model){
 
         // call this method to add the questions into a list
-        playerService.storeGameQuestionIDs();
+        playerService.getQuestionIDs();
 
         model.addAttribute("gameQuestions", playerService.displayGameQuestions());
 
@@ -70,16 +71,20 @@ public class PlayerController  {
     }
 
     @RequestMapping(nextQuestion)
-    public String displayNextQuestion(Model model){
+    public String displayNextQuestion(Model model,
+                                      @RequestParam(value = "id", required = false) Long id,
+                                      @RequestParam(value = "correctAnswer", required = false) String correctAnswer,
+                                      @RequestParam(value = "userAnswer", required = false) String userAnswer){
 
         EPlayerAnswerStatus nullResults = playerService.listIsNull();
+        playerService.verifyAnswers(correctAnswer, userAnswer);
 
         if (nullResults == EPlayerAnswerStatus.NULL_RESULTS){
 
-            // we get this results when the list empty
-            // when the list is empty it means the is no more questions
-            // the display the players answers
-            System.out.println("Player Results");
+
+            model.addAttribute("playerCorrectAnswers", playerService.correctAnswers());
+
+            return playerResultsTemplate;
 
         }else {
             model.addAttribute("gameQuestions", playerService.displayGameQuestions());
@@ -87,48 +92,8 @@ public class PlayerController  {
             return playerQuestionsTemplate;
         }
 
-        return null;
 
     }
-
-    // next question
-
-    // mapping has errors - to resolve
-    @RequestMapping(submitQuestionAnswers)
-    public void questionAnswers(@RequestParam(value = "id", required = false) String[] id,
-                                @RequestParam(value = "answer1", required = false) String[] answer1,
-                                @RequestParam(value ="answer2", required = false)String[] answer2,
-                                @RequestParam(value ="answer3", required = false)String[] answer3,
-                                @RequestParam(value ="answer4", required = false)String[] answer4){
-
-        ArrayList<EPlayerAnswerStatus> answerStatus  = playerService.verifyAnswers(id,answer1,answer2,answer3,answer4);
-
-        ArrayList<EPlayerAnswerStatus> listOfCorrectStatus = new ArrayList<>();
-        ArrayList<EPlayerAnswerStatus> listOfIncorrectStatus = new ArrayList<>();
-        ArrayList<EPlayerAnswerStatus> listOfNoInputStatus = new ArrayList<>();
-
-        for (EPlayerAnswerStatus status: answerStatus) {
-
-            if (status ==EPlayerAnswerStatus.CORRECT){
-                listOfCorrectStatus.add(status);
-            }else if (status ==EPlayerAnswerStatus.INCORRECT){
-                listOfIncorrectStatus.add(status);
-
-            }else if (status==EPlayerAnswerStatus.NO_INPUT){
-                listOfNoInputStatus.add(status);
-            }
-        }
-
-        System.out.println(listOfCorrectStatus.size());
-        System.out.println(listOfIncorrectStatus.size());
-        System.out.println(listOfNoInputStatus.size());
-
-
-    }
-
-
-
-
 
 
 }

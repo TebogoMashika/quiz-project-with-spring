@@ -32,7 +32,11 @@ public class PlayerService {
         this.gameQuestionsRepository = gameQuestionsRepository;
     }
 
-    ArrayList<Long> results = new ArrayList<>();
+    // store question ID's
+    ArrayList<Long> StoreQuestionIDs = new ArrayList<>();
+
+    // store Correct Answers
+    ArrayList<String> storeCorrectAnswers  = new ArrayList<>();
 
     // save the username
     public void savePlayerInputs(Player player){
@@ -49,7 +53,7 @@ public class PlayerService {
     }
 
     // store game question id method
-    public void storeGameQuestionIDs(){
+    public void getQuestionIDs(){
 
       ArrayList<GameQuestions> databaseResults = (ArrayList<GameQuestions>) gameQuestionsRepository.findAll();
 
@@ -57,7 +61,7 @@ public class PlayerService {
       for (GameQuestions gameQuestions: databaseResults  )
       {
         Long id = gameQuestions.getId();
-        results.add(id);
+        StoreQuestionIDs.add(id);
 
       }
 
@@ -70,9 +74,9 @@ public class PlayerService {
       // get question by id
       // remove the question we just displayed from the list
       // return the question
-      Long questionId = results.get(0);
+      Long questionId = StoreQuestionIDs.get(0);
       GameQuestions displayQuestion = gameQuestionsRepository.getById(questionId);
-      results.remove(questionId);
+      StoreQuestionIDs.remove(questionId);
 
       return displayQuestion;
 
@@ -82,78 +86,31 @@ public class PlayerService {
     // if true returns a enum status NULL_RESULTS
     public EPlayerAnswerStatus listIsNull(){
 
-      if (results == null || results.size() == 0){
+      if (StoreQuestionIDs == null || StoreQuestionIDs.size() == 0){
 
         return EPlayerAnswerStatus.NULL_RESULTS;
 
       }
-
       return null;
     }
 
 
-    public ArrayList<EPlayerAnswerStatus> verifyAnswers(String[] id, String[] answer1, String[] answer2, String[] answer3, String[] answer4){
+    public void verifyAnswers(String correctAnswer, String userAnswer){
 
-        ArrayList<EPlayerAnswerStatus> results = new ArrayList<>();
+           // check answers and options
+          if (correctAnswer.equals(userAnswer)){
+            storeCorrectAnswers.add(userAnswer);
+          }
 
-        // goes through each id and
-        for (String val : id){
-
-            // get game question columns by id
-           Optional<GameQuestions> databaseResults =  gameQuestionsRepository.findById(Long.parseLong(val));
-
-
-           // get database results
-            String correctAnswer= databaseResults.get().getCorrectAnswer();
-
-            EPlayerAnswerStatus one  = verifyColumn(answer1, correctAnswer);
-
-            EPlayerAnswerStatus two  = verifyColumn(answer2, correctAnswer);
-
-            EPlayerAnswerStatus three  =verifyColumn(answer3, correctAnswer);
-
-            EPlayerAnswerStatus four = verifyColumn(answer4, correctAnswer);
-
-
-            if (one == EPlayerAnswerStatus.CORRECT || one == EPlayerAnswerStatus.NO_INPUT || one == EPlayerAnswerStatus.INCORRECT ){
-              results.add(one);
-            }
-            if (two == EPlayerAnswerStatus.CORRECT || two == EPlayerAnswerStatus.NO_INPUT || two == EPlayerAnswerStatus.INCORRECT ){
-              results.add(one);
-            }
-            if (three == EPlayerAnswerStatus.CORRECT || three == EPlayerAnswerStatus.NO_INPUT || three == EPlayerAnswerStatus.INCORRECT ){
-              results.add(one);
-            }
-            if (four == EPlayerAnswerStatus.CORRECT || four == EPlayerAnswerStatus.NO_INPUT || four == EPlayerAnswerStatus.INCORRECT ){
-              results.add(one);
-            }
-
-        }
-        return results;
     }
 
-    private EPlayerAnswerStatus verifyColumn(String[] answer, String correctAnswer)
+    // return number of correct answers
+    public Integer correctAnswers()
     {
-        if (answer != null){
 
-            List<String> answersFromColumn = Arrays.asList(answer);
+      Integer numberOfCorrectAnswers = storeCorrectAnswers.size();
 
-
-            if (answersFromColumn.contains(correctAnswer)){
-
-                return EPlayerAnswerStatus.CORRECT;
-
-            }else{
-              return EPlayerAnswerStatus.INCORRECT;
-            }
-
-
-        }else if (answer == null){
-
-            return EPlayerAnswerStatus.NO_INPUT;
-        }
-
-        return null;
+      return numberOfCorrectAnswers;
     }
 
 

@@ -9,32 +9,24 @@
   <h1 >Player Questions</h1>
 
 
-  <form th:action="@{/submitQuestionAnswers}">
+  <form th:action="@{/nextQuestion}">
 
     <ul th:each="questions : ${gameQuestions}">
 
       <p th:text="${questions.question}"> </p>
 
       <input type="hidden"  name="id" th:value="${questions.id}"> <br>
-      <input type="checkbox" th:text="${questions.OtherAnswers_1}" name="answer1" th:value="${questions.OtherAnswers_1}"> <br>
-      <input type="checkbox" th:text="${questions.OtherAnswers_2}" name="answer2" th:value="${questions.OtherAnswers_2}"> <br>
-      <input type="checkbox" th:text="${questions.OtherAnswers_3}" name="answer3" th:value="${questions.OtherAnswers_3}"> <br>
-      <input type="checkbox" th:text="${questions.OtherAnswers_4}" name="answer4" th:value="${questions.OtherAnswers_4}"> <br>
-
-
+      <input type="hidden"  name="correctAnswer" th:value="${questions.CorrectAnswer}"> <br>
+      <input type="radio" th:text="${questions.OtherAnswers_1}" name="userAnswer" th:value="${questions.OtherAnswers_1}"> <br>
+      <input type="radio" th:text="${questions.OtherAnswers_2}" name="userAnswer" th:value="${questions.OtherAnswers_2}"> <br>
+      <input type="radio" th:text="${questions.OtherAnswers_3}" name="userAnswer" th:value="${questions.OtherAnswers_3}"> <br>
+      <input type="radio" th:text="${questions.OtherAnswers_4}" name="userAnswer" th:value="${questions.OtherAnswers_4}"> <br>
 
     </ul>
 
-    <!--pending task. make button submit answers -->
-    <button type="submit">submit Answers</button>
+    <button type="submit">Next</button>
 
   </form>
-
-
-
-
-
-
 
 
 

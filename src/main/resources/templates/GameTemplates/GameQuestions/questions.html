@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Questions</title>
   </head>
   <body>
 
@@ -52,7 +52,10 @@
 
     </form><br>
 
-    <button type="submit  @{/}" > finished </button>
+    <button type="submit" >
+
+      <a th:href="@{/finishCapturingQuestionsButton}">finished</a>
+    </button>
 
   </body>
 </html>

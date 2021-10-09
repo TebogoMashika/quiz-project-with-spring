@@ -17,7 +17,8 @@ public class QuestionService {
 
     // save questions
     public void saveGameQuestions(GameQuestions gameQuestions){
-        
+
+
         gameQuestionsRepository.save(gameQuestions);
     }
 

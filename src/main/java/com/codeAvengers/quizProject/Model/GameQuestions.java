@@ -23,6 +23,7 @@ public class GameQuestions {
     @Column(name = "OtherAnswers_4")
     private String OtherAnswers_4;
 
+
     public GameQuestions() {
     }
 

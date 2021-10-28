@@ -1,30 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
+
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no">
+
         <title>Quiz Master Home </title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     </head>
+
+    <img src="../images/Q-marks 1.jpg" class="img-fluid d-block" style="height: 100vh; width: 100%">
+
     <body>
 
-        <h1>Quiz Master Home Page</h1>
+        <div class="container-fluid d-block d-flex flex-nowrap">
 
-        <form th:action="@{/requestGameName}" >
-
-            <div>
-                <label>Enter Game Pin: </label>
-                <input type="text"  th:name="gamePin"/>
-
-            </div> <br>
-
-            <div>
-                <label>Enter Game Name: </label>
-
-                <input type="text"  th:name="gameName"/>
+            <div class="position-absolute top-0 start-50 translate-middle-x justify-content-center">
+                <h1 class="text-center text-decoration-none text-white display-1 fw-bold" style="font-weight: 200; letter-spacing: 0.3rem;">Quiz Master Home</h1>
             </div>
 
-            <button type="submit" > Next</button>
+            <div class="card position-absolute top-50 start-50 translate-middle justify-content-center bg-secondary bg-opacity-75">
 
-        </form>
+                <form th:action="@{/requestGameName}" method="post"
+                      style="max-width: 600px; margin: 0 auto;">
 
+                    <div class="form-group row p-3 mb-2">
+                        <label class="col-form-label col-6 text-white text-center text-decoration-none fw-bold">Enter Game Pin: </label>
+                        <div class="col-6">
+                            <input type="text"  th:name="gamePin" class="form-control" required minlength="4" maxlength="6"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row p-3 mb-2">
+                        <label class="col-form-label col-6 text-white text-center text-decoration-none fw-bold">Enter Game Name: </label>
+                        <div class="col-6">
+                            <input type="text"  th:name="gameName" class="form-control" required minlength="3" maxlength="20"/>
+                        </div>
+                    </div>
+
+                    <div class="justify-content-center">
+                        <button type="submit" class="btn btn-outline-dark btn-lg border-radius-sm p-3 m-5 bg-white bg-opacity-75" style="min-width: 20rem; max-width: 20rem;" > Next</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
 </html>

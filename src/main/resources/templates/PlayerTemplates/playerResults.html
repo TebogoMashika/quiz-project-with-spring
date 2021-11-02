@@ -1,22 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
+
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no">
+
     <title>Game Results</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
   </head>
+
+  <img src="../images/Books 1.jpg" class="img-fluid d-block" style="height: 100vh; width: 100%">
 
   <body>
 
-  <h1>Player Results</h1>
+    <div class="container-fluid d-block d-flex flex-nowrap">
+
+      <div class="position-absolute top-0 start-50 translate-middle-x justify-content-center">
+        <h1 class="text-center text-decoration-none text-white display-1 fw-bold" style="font-weight: 200; letter-spacing: 0.3rem;">Player Results</h1>
+      </div>
 
 
-  <div th:each="answers : ${playerCorrectAnswers}">
+      <div class="card col-8 position-absolute top-50 start-50 translate-middle justify-content-center bg-secondary bg-opacity-75" style="max-width: 600px; margin: 0 auto;">
 
-    <label> Number of Correct Answers Captured
-      <p th:text="${answers}"></p>
-    </label>
+        <div th:each="answers : ${playerCorrectAnswers}">
 
-  </div>
+          <label class="text-white text-centered text-decoration-none fs-1 fw-bold d-flex align-items-center justify-content-center p-5 m-3"> Correct Answers:
 
+            <br>
+
+            <div>
+              <p class="badge rounded-pill bg-info text-white text-centered fw-bold d-flex align-items-center justify-content-center p-2 m-3" th:text="${answers}"></p>
+            </div>
+
+          </label>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html>

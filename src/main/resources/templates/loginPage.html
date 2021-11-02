@@ -2,35 +2,65 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no">
+
         <title>Login</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     </head>
+
+    <img src="../images/Books 2.jpg" class="img-fluid d-block" style="height: 100vh; width: 100%">
+
     <body>
 
-        <h1>Login Page</h1>
+        <div class="container-fluid d-block d-flex flex-nowrap">
 
-        <form th:action="@{/userLogInForm}" th:object="${logIn} ">
-
-            <div>
-                <label>Username: </label>
-                <input type="text"  th:field="*{username}">
+            <div class="position-absolute top-0 start-50 translate-middle-x justify-content-center">
+                <h1 class="text-center text-decoration-none text-white display-1 fw-bold" style="font-weight: 200; letter-spacing: 0.3rem;">Login Page</h1>
             </div>
 
-            <div>
-                <label>Password: </label>
-                <input type="text"  th:field="*{password}">
+            <div class="card position-absolute top-50 start-50 translate-middle justify-content-center bg-secondary bg-opacity-75">
+
+                <form th:action="@{/userLogInForm}" method="post"
+                      style="max-width: 600px; margin: 0 auto;"
+                      th:object="${logIn} ">
+
+                    <div th:if="${errorMessage}">
+                        <div class="p-2 m-2 text-danger text-center text-decoration-none fw-bold" th:text="${errorMessage}"></div>
+                    </div>
+
+                    <div class="form-group row p-3 mb-2">
+                        <label class="col-form-label col-4 text-white text-center text-decoration-none fw-bold">Username : </label>
+                        <div class="col-8">
+                            <input type="text"  th:field="*{username}" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group row p-3 mb-2">
+                        <label class="col-form-label col-4 text-white text-center text-decoration-none fw-bold">Password: </label>
+                        <div class="col-8">
+                            <input type="text"  th:field="*{password}" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="align-center justify-content-center">
+                        <button type="submit " class="btn btn-outline-dark btn-lg border-radius-sm p-3 m-5 text-dark text-center text-decoration-none fw-bold bg-white bg-opacity-75" style="min-width: 10rem; max-width: 10rem;">
+                            Sign In
+                        </button>
+
+                        <button type="button" class="btn btn-outline-dark btn-lg border-radius-sm p-3 m-5 bg-white bg-opacity-75" style="min-width: 10rem; max-width: 10rem;">
+                            <a class="text-dark text-center text-decoration-none fw-bold" th:href="@{/registerUser}">Sign Up</a>
+                        </button>
+                    </div>
+
+
+                </form>
+
             </div>
+        </div>
 
-            <div th:if="${errorMessage}">
-                <div th:text="${errorMessage}"></div>
-            </div>
 
-            <button type="submit " > Login</button>
-
-        </form>
-
-        <button >
-            <a th:href="@{/registerUser}"> Click to register</a>
-        </button>
-
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
 </html>

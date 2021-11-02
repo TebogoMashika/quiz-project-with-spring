@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -89,9 +90,12 @@ public class LoginPageController {
     // LogInStatus - is an enum class that has all our statuses
     // pass firstname, last name and email to the registerUser method in logInService class
     // displays the error if it exists
-    // if status is SUCCESS we save the results to the database and redirect user to the /registerUserLogins.html page
     @RequestMapping(value = "/registerUserForm")
-    public String registerNewUserForm(@ModelAttribute("quizMaster")  QuizMaster quizMaster, RedirectAttributes redirectAttributes){
+    public String registerNewUserForm(@ModelAttribute("quizMaster")  QuizMaster quizMaster,
+                                      @RequestParam(value = "username") String username,
+                                      @RequestParam(value = "password") String password,
+
+                                      RedirectAttributes redirectAttributes){
 
         LogInStatus status = logInService.registerUser(quizMaster.getFirstName(), quizMaster.getLastName(), quizMaster.getEmail());
 
@@ -102,38 +106,30 @@ public class LoginPageController {
 
             }
             case SUCCESS -> {
-                quizMasterRepository.save(quizMaster);
 
-                quizMaster.getLogIn();
-                return "redirect:/registerUserLogins.html";
+                LogInStatus passwordStatus = logInService.saveLogInDetails(username, password);
+
+                switch (passwordStatus){
+
+                    case FAILURE -> {
+                        redirectAttributes.addFlashAttribute("errorMessage", "Error creating user. please make make sure password is captured as Integer");
+                        return "redirect:/registerUser" ;
+                    }
+                    case SUCCESS -> {
+                        quizMasterRepository.save(quizMaster);
+                        return "redirect:/LoginPage" ;
+                    }
+
+                }
+
             }
+
+
         }
 
         return null;
     }
 
-    // receive request from this link - {"/registerUserLogins.html", "/registerUserLogins"
-    // model attribute is logIn
-    // return "/registerUserLogins.html" - (will be directed to this page)
-    @RequestMapping({"/registerUserLogins.html", "/registerUserLogins"})
-    public String requestRegisterNewUserLoginsPage(LogIn logIn){
-
-        return "/registerUserLogins.html" ;
-
-    }
-
-    // receive request from this link - "/registerNewUserLogInsForm"
-    // model attribute is logIn
-    // save the model to the database
-    // return "/LoginPage" - (will be directed to this page)
-    @RequestMapping(value = "/registerNewUserLogInsForm")
-    public String newUserLogins(LogIn logIn){
-
-        logInService.saveLogInDetails(logIn);
-
-        return "redirect:/LoginPage" ;
-
-    }
 
     // receive request from this link - "/QuizMasterHomePage"
     // model attribute is quizMaster

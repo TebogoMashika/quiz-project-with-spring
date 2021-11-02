@@ -25,6 +25,17 @@
         <input type="text"  th:field="*{email}">
       </div>
 
+      <div>
+        <label>Capture Username: </label>
+        <input type="text"  th:name="username" />
+      </div>
+
+      <div>
+        <label>Capture Password: </label>
+        <input type="text"  th:name="password" />
+      </div>
+
+
       <div th:if="${errorMessage}">
         <div th:text="${errorMessage}"></div>
       </div>

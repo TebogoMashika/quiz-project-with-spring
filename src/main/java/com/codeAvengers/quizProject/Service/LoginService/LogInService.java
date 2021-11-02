@@ -76,9 +76,19 @@ public class LogInService {
 
 
     // save login details
-    public void saveLogInDetails(LogIn logIn){
+    public LogInStatus saveLogInDetails(String username, String  password){
+        try
+        {
+            LogIn logIn  = new LogIn();
+            logIn.setUsername(username);
+            logIn.setPassword(Integer.parseInt(password));
+            logInRepository.save(logIn);
 
-        logInRepository.save(logIn);
+            return LogInStatus.SUCCESS;
+        }catch (Exception e){
+            return LogInStatus.FAILURE;
+        }
+
 
     }
 

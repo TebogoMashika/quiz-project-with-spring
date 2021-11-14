@@ -21,17 +21,6 @@
         <h1 class="text-center text-decoration-none text-white display-1 fw-bold" style="font-weight: 200; letter-spacing: 0.3rem;">Player</h1>
       </div>
 
-      <!--display the game pin here-->
-      <div>
-
-        <label th:each="displayGamePin : ${viewGamePin} ">
-
-          <p>Game pin:  <strong th:text="${displayGamePin.gamePin}"></strong> </p>
-
-        </label>
-
-      </div>
-
       <div class="card position-absolute top-50 start-50 translate-middle justify-content-center bg-secondary bg-opacity-75">
 
         <form th:action="@{/requestPlayerGameInputs}" method="post"
